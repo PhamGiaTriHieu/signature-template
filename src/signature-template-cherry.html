@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+
+<HEAD>
+    <TITLE>Email Signature</TITLE>
+    <META content="text/html; charset=utf-8" http-equiv="Content-Type">
+</HEAD>
+
+<BODY style="font-size: 10pt; font-family: Arial, sans-serif;">
+
+    <table style="min-width: 660px; font-size: 10pt; FONT-FAMILY: Arial, sans-serif; " cellspacing="0" cellpadding="0"
+        border="0">
+        <tbody>
+            <tr>
+                <td style="min-width: 210px; font-size: 11pt; font-family: Arial, sans-serif;vertical-align: top;"
+                    valign="top">
+                    <p style="margin-top: 0px; margin-bottom: 0; margin-top: 0; padding: 0px;">
+                        <a href="https://cherry-solutions.com/" target="_blank" style="width: 150px; display: block;">
+                            <img style="width: 100%;" id="image" src="" alt="logo">
+                        </a>
+                    </p>
+                    <p style="margin-bottom: 5px; margin-top: 5px; padding: 0px;">
+                        <span id="name"
+                            style="font-size: 16pt; font-family: Arial, sans-serif; color:#333333;">name</span>
+                    </p>
+                    <p style="margin-bottom: 5px; margin-top: 0px; padding: 0px;">
+                        <span style="font-size: 10pt; font-family: Arial, sans-serif; color:#333333;">Frontend
+                            Developer</span>
+                    </p>
+                    <p
+                        style="white-space:nowrap; margin-bottom: 0px; margin-top: 5px; padding: 0px; FONT-FAMILY: Arial, sans-serif; font-size: 10pt; ">
+                        Cherry Solutions Vietnam Co.,Ltd.
+                    </p>
+                </td>
+                <td style="width: 30px; border-right: 1px solid #dddd"></td>
+                <td style="width: 10px;"></td>
+                <td style="min-width: 450px; font-size: 10pt; color:#444444; font-family: Arial, sans-serif; vertical-align: top;"
+                    valign="top">
+
+                    <p style="FONT-FAMILY: Arial, sans-serif; padding: 0px; font-size: 9pt;">
+                        <span style="display: block; margin-bottom: 2px;">
+                            <span
+                                style="font-size: 13pt; color: #333333; display: inline-block; width: 60px;">mobile</span>
+
+                            <a id="phoneNumber" style="font-size: 13pt; color:#333333; text-decoration: none"
+                                href="tel:">+84 985054xxx</a>
+                        </span>
+                        <span style="display: block;">
+                            <span
+                                style="font-size: 13pt; color: #333333; display: inline-block; width: 60px;">email</span>
+                            <a id="email" style="font-size: 13pt; color:#333333; text-decoration: none"
+                                href="mailTo:phamgiatrihieu@cherry-solutions.com">test@cherry-solutions.com</a>
+                        </span>
+                        </span>
+                    </p>
+                    <p style="margin: 0;">
+                        <span style="font-size: 9pt; color:#333333;"> VP4-04, 4th Floor, Bcons Tower I, 176/1-176/3
+                            Nguyen Van Thuong, ward 25, Binh Thanh district, HCM city, Vietnam
+                        </span>
+                    </p>
+                    <p style="margin-top: 5px; margin-bottom: 0;">
+                        www.cherry-solutions.com
+                    </p>
+                    <p style="margin-top: 5px; margin-bottom: 0;">
+                        <span style="font-size: 9pt; color:#333333;">Make all Finance <span
+                                style="color:#ec1c24">E</span>asier, Make all Works <span
+                                style="color:#ec1c24">F</span>un</span>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Change info here
+        let name = 'Su Ha' // name 
+        let phoneNumber = '985054xxx' // phone number 
+        let emailName = 'su.ha' // only name of email
+
+        // ===== Ending change ======
+        let suffixMail = '@cherry-solutions.com'
+        let nameDome = document.getElementById("name");
+        let phoneNumberDome = document.getElementById("phoneNumber");
+        let emailDom = document.getElementById("email");
+        let imageUrlDome = document.getElementById("image");
+        nameDome.innerHTML = name
+        phoneNumberDome.innerHTML = `+84 ${phoneNumber}`
+        phoneNumberDome.setAttribute('href', `tel:84${phoneNumber}`)
+        emailDom.innerHTML = emailName + suffixMail
+        emailDom.setAttribute('href', `mailTo:${emailName}${suffixMail}`)
+        imageUrlDome.setAttribute('src', 'logo_cherry.png.webp')
+    </script>
+</BODY>
+
+</HTML>
