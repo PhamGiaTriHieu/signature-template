@@ -7,7 +7,7 @@ const TData = (props) => {
     verticalAlign,
     align,
     width,
-    borderRight,
+    border_right,
     color,
     fontSize,
     children,
@@ -19,7 +19,7 @@ const TData = (props) => {
       minWidth={minWidth}
       align={align}
       width={width}
-      borderRight={borderRight}
+      border_right={border_right}
       color={color}
       fontSize={fontSize}
       {...rest}
@@ -32,10 +32,11 @@ const TData = (props) => {
 export {TData};
 
 const TbodyStyled = styled.td`
-  min-width: ${(props) => props.minWidth};
+  /* min-width: ${(props) => props.minWidth}; */
   vertical-align: ${(props) => props.verticalAlign};
-  width: ${(props) => props.width};
-  border-right: ${(props) => props.borderRight};
+  /* width: ${(props) => props.width}; */
+  width: ${(props) => console.log(props.width)};
+  border-right: ${(props) => props.border_right};
   color: ${(props) => props.color};
   font-size: ${(props) => props.fontSize};
 `;

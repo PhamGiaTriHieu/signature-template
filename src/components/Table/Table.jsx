@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {TData} from './TData';
+import {Typography} from '@mui/material';
 
 const Table = () => {
   return (
@@ -59,17 +60,11 @@ const Table = () => {
               Cherry Solutions Vietnam Co.,Ltd.
             </p>
           </TData>
-          <TData width="30px" borderRight="1px solid #dddd" />
+          <TData width="40px" border_right="1px solid #dddd" />
           <TData width="10px" />
-          <TData
-            minWidth="450px"
-            color="#444"
-            fontSize="13px"
-            verticalAlign="top"
-            align="top"
-          >
-            <p>
-              <span style={{display: 'block', marginBottom: '2px'}}>
+          <TData color="#444" fontSize="13px" verticalAlign="top" align="top">
+            <Typography sx={{lineHeight: '13px'}}>
+              <Typography style={{display: 'block', marginBottom: '2px'}}>
                 <span
                   style={{
                     fontSize: '13pt',
@@ -91,8 +86,15 @@ const Table = () => {
                 >
                   +84 985054xxx
                 </a>
-              </span>
-              <span style={{display: 'block'}}>
+              </Typography>
+              <Typography
+                style={{display: 'block'}}
+                sx={{
+                  lineHeight: '13px',
+                  marginBottom: '10px',
+                  marginTop: '4px',
+                }}
+              >
                 <span
                   style={{
                     fontSize: '13pt',
@@ -114,24 +116,24 @@ const Table = () => {
                 >
                   test@cherry-solutions.com
                 </a>
-              </span>
-            </p>
-            <p style={{margin: '0'}}>
-              <span style={{fontSize: '9pt', color: '#333333'}}>
+              </Typography>
+            </Typography>
+            <Typography style={{margin: '0'}} fontSize="small">
+              <span style={{fontSize: '12px', color: '#333333'}}>
                 VP4-04, 4th Floor, Bcons Tower I, 176/1-176/3 Nguyen Van Thuong,
                 ward 25, Binh Thanh district, HCM city, Vietnam
               </span>
-            </p>
-            <p style={{marginTop: 5 + 'px', marginBottom: '0'}}>
+            </Typography>
+            <Typography fontSize="small" sx={{fontSize: '12px'}}>
               www.cherry-solutions.com
-            </p>
-            <p style={{marginTop: 5 + 'px', marginBottom: '0'}}>
-              <span style={{fontSize: '9pt', color: '#333333'}}>
+            </Typography>
+            <Typography fontSize="small" sx={{fontSize: '12px'}}>
+              <span style={{color: '#333333'}}>
                 Make all Finance <span style={{color: '#ec1c24'}}>E</span>
                 asier, Make all Works
                 <span style={{color: '#ec1c24'}}>F</span>un
               </span>
-            </p>
+            </Typography>
           </TData>
         </tr>
       </tbody>
