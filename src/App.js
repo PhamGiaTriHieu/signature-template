@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
+import PrimaryLayout from './components/Layouts/PrimaryLayout';
 
 function App() {
-  return <div className="App"></div>;
+  return <PrimaryLayout></PrimaryLayout>;
 }
 
 export default App;
