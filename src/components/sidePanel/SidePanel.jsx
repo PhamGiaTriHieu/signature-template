@@ -1,9 +1,40 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Stack, TextField, Typography} from '@mui/material';
 import styled from 'styled-components';
 import Input from '../input/Input';
+import useValuesStore from '../../stores/valuesStore';
 
 const SidePanel = () => {
+  const [inputValues, setInputValue] = useState({
+    name: '',
+    jobTitle: '',
+    phoneNumber: '',
+    email: '',
+    logoLink: '',
+  });
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    // console.log('Name: ', name);
+    // console.log('Value: ', value);
+    setInputValue((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  useEffect(() => {
+    setName(inputValues);
+  }, [inputValues]);
+
+  //   console.log('inputValues: ', inputValues);
+
+  //   const {values} = useValuesStore((state) => state.values);
+
+  const setName = useValuesStore((state) => state.setName);
+
   return (
     <SidePanelWrapper>
       <SidePanelContent>
@@ -20,36 +51,55 @@ const SidePanel = () => {
         >
           <InputBox>
             <Input
+              name="name"
               fullWidth
               variant="standard"
               label="Name"
               placeholder="Enter Your Name"
+              onChange={(e) => handleChange(e)}
             ></Input>
           </InputBox>
 
           <InputBox>
             <Input
+              name="jobTitle"
               fullWidth
               variant="standard"
               label="Job title"
               placeholder="Enter Your Job Title"
+              onChange={(e) => handleChange(e)}
             ></Input>
           </InputBox>
 
           <InputBox>
             <TextField
+              name="phoneNumber"
               fullWidth
               variant="standard"
               label="Phone Number"
               placeholder="Enter Your Phone Number"
+              onChange={(e) => handleChange(e)}
             ></TextField>
           </InputBox>
           <InputBox>
             <TextField
+              name="email"
               fullWidth
               variant="standard"
               label="Email"
               placeholder="Enter Your Email"
+              onChange={(e) => handleChange(e)}
+            ></TextField>
+          </InputBox>
+
+          <InputBox>
+            <TextField
+              name="logoLink"
+              fullWidth
+              variant="standard"
+              label="Logo Link"
+              placeholder="https://example.com/images"
+              onChange={(e) => handleChange(e)}
             ></TextField>
           </InputBox>
         </InputWrapper>
