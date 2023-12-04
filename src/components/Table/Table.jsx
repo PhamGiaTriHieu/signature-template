@@ -1,15 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
-import {TData} from './TData';
-import {Typography} from '@mui/material';
 import useValuesStore from '../../stores/valuesStore';
+import {Box, Button, Stack} from '@mui/material';
+import styled from 'styled-components';
 import ClipboardJS from 'clipboard';
+import MDModal from '../Modal/MDModal';
 
 const Table = () => {
   const value = useValuesStore((state) => state.values);
+  const [showModal, setShowModal] = useState(false);
 
   const logoDefault =
-    'https://drive.google.com/uc?export=view&id=1w4oE6OIXLUhdzYN3sLxbi6yH15K0Ykp5';
+    'https://tysystems-my.sharepoint.com/:u:/g/personal/su_ha_cherry-solutions_com/EZfd4kmxZWlKiZ-osIGIn5QBBTMwAVTDMTToQQazmxuNZQ?e=eQsP4t';
+
+  // 'https://drive.google.com/uc?export=view&id=1w4oE6OIXLUhdzYN3sLxbi6yH15K0Ykp5';
 
   const [imageUlr, setImageUlr] = useState(logoDefault);
 
@@ -17,36 +20,70 @@ const Table = () => {
     const imageLogo = value.logoLink;
     if (imageLogo) {
       setImageUlr(imageLogo);
-      console.log('re-render');
     } else {
       setImageUlr(logoDefault);
     }
   }, [value.logoLink]);
 
-  const clipboard = new ClipboardJS('.copy');
-  console.log('clipboard: ', clipboard);
+  const tableDom = document.querySelector('#table-template');
+  const textNode = tableDom?.outerHTML;
+
+  const copyToClipboard = () => {
+    if (navigator.clipboard) {
+      navigator.clipboard
+        .writeText(textNode)
+        .then(() => {
+          // console.log(`Copied text to clipboard: ${textNode}`);
+          // alert(`Copied text to clipboard: ${textNode}`);
+        })
+        .catch((error) => {
+          console.error(`Could not copy text: ${error}`);
+        });
+    } else {
+      window.prompt('Copy to clipboard: Ctrl+C, Enter', textNode);
+    }
+  };
+
+  function copyText() {
+    const clipboard = new ClipboardJS('.copyText');
+    clipboard.on('success', function (e) {
+      e.clearSelection();
+    });
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
-    <div>
-      <button
-        class="copy"
-        data-clipboard-target="table-template"
-        data-copy-element="table-template"
+    <Wrapper>
+      <table
+        id="table-template"
+        style={{
+          minWidth: 660,
+          fontSize: '10pt',
+          fontFamily: 'Arial, sans-serif',
+        }}
+        cellSpacing={0}
+        cellPadding={0}
+        border={0}
       >
-        Copy to clipboard
-      </button>
-
-      <TableStyled id="table-template">
         <tbody>
           <tr>
-            <TData minwidth="210px" align="top" style={{verticalAlign: 'top'}}>
-              <p
-                style={{marginTop: '0px', marginBottom: '0px', padding: '0px'}}
-              >
+            <td
+              style={{
+                minWidth: 210,
+                fontSize: '11pt',
+                fontFamily: 'Arial, sans-serif',
+                verticalAlign: 'top',
+              }}
+              valign="top"
+            >
+              <p style={{marginTop: 0, marginBottom: 0, padding: 0}}>
                 <a
                   href="https://cherry-solutions.com/"
                   target="_blank"
-                  style={{width: '150px', display: 'block'}}
+                  style={{width: 150, display: 'block'}}
                   rel="noreferrer"
                 >
                   <img
@@ -57,9 +94,7 @@ const Table = () => {
                   />
                 </a>
               </p>
-              <p
-                style={{marginBottom: '5px', marginTop: '5px', padding: '0px'}}
-              >
+              <p style={{marginBottom: 5, marginTop: 5, padding: 0}}>
                 <span
                   id="name"
                   style={{
@@ -71,9 +106,7 @@ const Table = () => {
                   {value?.name || 'Su Ha'}
                 </span>
               </p>
-              <p
-                style={{marginBottom: '5px', marginTop: '0px', padding: '0px'}}
-              >
+              <p style={{marginBottom: 6, marginTop: 0, padding: 0}}>
                 <span
                   style={{
                     fontSize: '10pt',
@@ -87,117 +120,169 @@ const Table = () => {
               <p
                 style={{
                   whiteSpace: 'nowrap',
-                  marginBottom: '0px',
-                  marginTop: '5px',
-                  padding: '0px',
+                  marginBottom: 0,
+                  marginTop: 6,
+                  padding: 0,
                   fontFamily: 'Arial, sans-serif',
                   fontSize: '10pt',
                 }}
               >
                 Cherry Solutions Vietnam Co.,Ltd.
               </p>
-            </TData>
-            <TData width="40px" borderright="1px solid #dddd" />
-            <TData width="10px" />
-            <TData color="#444" fontSize="13px" align="top">
-              <Typography component={'span'} sx={{lineHeight: '13px'}}>
-                <Typography
-                  component={'span'}
-                  style={{display: 'block', marginBottom: '2px'}}
-                >
-                  <span
-                    style={{
-                      fontSize: '13pt',
-                      color: '#333333',
-                      display: 'inline-block',
-                      width: '60px',
-                    }}
-                  >
-                    mobile
-                  </span>
-                  <a
-                    id="phoneNumber"
-                    style={{
-                      fontSize: '13pt',
-                      color: '#333333',
-                      textDecoration: 'none',
-                    }}
-                    href="tel:"
-                  >
-                    +84 {`${value?.phoneNumber}` || '985054xxx'}
-                  </a>
-                </Typography>
-                <Typography
-                  component={'span'}
-                  style={{display: 'block'}}
-                  sx={{
-                    lineHeight: '13px',
-                    marginBottom: '10px',
-                    marginTop: '4px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: '13pt',
-                      color: '#333333',
-                      display: 'inline-block',
-                      width: '60px',
-                    }}
-                  >
-                    email
-                  </span>
-                  <a
-                    id="email"
-                    style={{
-                      fontSize: '13pt',
-                      color: '#333333',
-                      textDecoration: 'none',
-                    }}
-                    // href="mailTo:phamgiatrihieu@cherry-solutions.com"
-                    href={`mailTo:${value?.email}@cherry-solutions.com`}
-                  >
-                    {value?.email || 'test'}@cherry-solutions.com
-                  </a>
-                </Typography>
-              </Typography>
-              <Typography
-                component={'span'}
-                style={{margin: '0'}}
-                fontSize="small"
+            </td>
+            <td style={{width: 20, borderRight: '1px solid #dddd'}} />
+            <td style={{width: 10}} />
+            <td
+              style={{
+                fontSize: '10pt',
+                color: '#444444',
+                fontFamily: 'Arial, sans-serif',
+                verticalAlign: 'top',
+              }}
+              valign="top"
+            >
+              <table
+                style={{
+                  fontFamily: 'Arial, sans-serif',
+                  fontSize: '9pt',
+                  margin: 0,
+                  borderSpacing: '0 4px',
+                }}
+                cellSpacing={0}
+                cellPadding={0}
+                border={0}
               >
-                <span style={{fontSize: '12px', color: '#333333'}}>
+                <tbody>
+                  <tr
+                    style={{
+                      fontSize: '11.5pt',
+                      color: '#333333',
+                    }}
+                  >
+                    <td style={{margin: 0, padding: '0 6spx 0 0'}}>Mobile:</td>
+                    <td>
+                      <a
+                        id="phoneNumber"
+                        style={{
+                          fontSize: '11.5pt',
+                          color: '#333333',
+                          textDecoration: 'none',
+                          display: 'inline-block',
+                        }}
+                        href="tel:"
+                      >
+                        +84 {`${value?.phoneNumber}` || '985054xxx'}
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr style={{fontSize: '11.5pt', color: '#333333'}}>
+                    <td style={{margin: 0, padding: '0 6spx 0 0'}}>Email:</td>
+                    <td>
+                      <a
+                        id="email"
+                        style={{
+                          fontSize: '11.5pt',
+                          color: '#333333',
+                          textDecoration: 'none',
+                          display: 'inline-block',
+                        }}
+                        href={`mailTo:${value?.email}@cherry-solutions.com`}
+                      >
+                        {value?.email || 'test'}@cherry-solutions.com
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p style={{margin: 0}}>
+                <span style={{fontSize: '8.7pt', color: '#333333'}}>
                   VP4-04, 4th Floor, Bcons Tower I, 176/1-176/3 Nguyen Van
-                  Thuong, ward 25, Binh Thanh district, HCM city, Vietnam
+                  Thuong, ward 25, Binh Thanh district, HCM city, Vietnam.
                 </span>
-              </Typography>
-              <Typography
-                component={'span'}
-                fontSize="small"
-                sx={{fontSize: '12px'}}
-              >
+              </p>
+              <p style={{fontSize: '8.7pt', marginTop: 5, marginBottom: 0}}>
                 www.cherry-solutions.com
-              </Typography>
-              <Typography
-                component={'span'}
-                fontSize="small"
-                sx={{fontSize: '12px'}}
-              >
-                <span style={{color: '#333333'}}>
+              </p>
+              <p style={{marginTop: 5, marginBottom: 0}}>
+                <span style={{fontSize: '8.7pt', color: '#333333'}}>
                   Make all Finance <span style={{color: '#ec1c24'}}>E</span>
                   asier, Make all Works
                   <span style={{color: '#ec1c24'}}>F</span>un
                 </span>
-              </Typography>
-            </TData>
+              </p>
+            </td>
           </tr>
         </tbody>
-      </TableStyled>
-    </div>
+      </table>
+
+      <ButtonWrapper>
+        <Stack
+          direction="row"
+          spacing={3}
+          sx={{width: '100%'}}
+          justifyContent="center"
+        >
+          <ButtonStyled
+            className="copyText"
+            data-clipboard-target="#table-template"
+            data-copy-element="#table-template"
+            onClick={() => {
+              copyText();
+              setShowModal(true);
+            }}
+          >
+            Click to Copy
+          </ButtonStyled>
+
+          <ButtonStyled
+            onClick={() => {
+              copyToClipboard();
+              setShowModal(true);
+            }}
+          >
+            Click to copy source template
+          </ButtonStyled>
+        </Stack>
+      </ButtonWrapper>
+
+      <MDModal
+        isOpen={showModal}
+        onClose={handleCloseModal}
+        description="Copy Successfully!"
+      ></MDModal>
+    </Wrapper>
   );
 };
 
 export default Table;
 
-const TableStyled = styled.table`
-  min-width: 660px;
+const Wrapper = styled.div`
+  position: relative;
+`;
+
+const ButtonWrapper = styled(Box)`
+  position: absolute;
+  min-width: 600px;
+  bottom: -50%;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 8px;
+`;
+
+const ButtonStyled = styled.button`
+  background: rgb(51, 71, 91);
+  height: 30px;
+  padding: 4px 8px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(51, 71, 91, 0.8);
+  }
 `;

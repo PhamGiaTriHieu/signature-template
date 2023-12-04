@@ -15,8 +15,7 @@ const SidePanel = () => {
 
   const handleChange = (e) => {
     const {name, value} = e.target;
-    // console.log('Name: ', name);
-    // console.log('Value: ', value);
+
     setInputValue((prev) => {
       return {
         ...prev,

@@ -6,11 +6,6 @@ const useValuesStore = create((set) => ({
     set((state) => ({
       values: {...name},
     })),
-
-  //   setJobTitle: (jobTitle) =>
-  //     set((state) => ({
-  //       values: {...state, jobTitle},
-  //     })),
 }));
 
 export default useValuesStore;

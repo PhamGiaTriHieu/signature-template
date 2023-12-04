@@ -9,9 +9,6 @@ const MainPanel = () => {
       <TableContentStyled>
         <Table></Table>
       </TableContentStyled>
-      <ButtonWrapper>
-        <Button>Click to copy signature template</Button>
-      </ButtonWrapper>
     </TableWrapperStyled>
   );
 };
@@ -55,12 +52,12 @@ const TableContentStyled = styled(Box)`
   border-radius: 8px;
 `;
 
-const ButtonWrapper = styled(Box)`
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -70%);
-  background-color: white;
-  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-`;
+// const ButtonWrapper = styled(Box)`
+//   position: absolute;
+//   top: 70%;
+//   left: 50%;
+//   transform: translate(-50%, -70%);
+//   background-color: white;
+//   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+//   border-radius: 8px;
+// `;
