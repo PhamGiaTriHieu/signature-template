@@ -9,10 +9,7 @@ const Table = () => {
   const value = useValuesStore((state) => state.values);
   const [showModal, setShowModal] = useState(false);
 
-  const logoDefault =
-    'https://tysystems-my.sharepoint.com/:u:/g/personal/su_ha_cherry-solutions_com/EZfd4kmxZWlKiZ-osIGIn5QBBTMwAVTDMTToQQazmxuNZQ?e=eQsP4t';
-
-  // 'https://drive.google.com/uc?export=view&id=1w4oE6OIXLUhdzYN3sLxbi6yH15K0Ykp5';
+  const logoDefault = 'https://i.imgur.com/1nNiyqS.png';
 
   const [imageUlr, setImageUlr] = useState(logoDefault);
 
